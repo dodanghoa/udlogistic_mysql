@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Login"
+    >
+
+    <TextView
+        android:layout_marginTop="160dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập vào hệ thống"
+        android:textSize="28dp"
+        android:gravity="center"
+
+        android:textStyle="bold"/>
+    <EditText
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:hint="Tên đăng nhập"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        />
+
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:hint="Mật khẩu" />
+    <TextView
+        android:layout_gravity="center"
+        android:textColor="#2155F3"
+        android:layout_marginTop="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Quên mật khẩu ?"
+        android:gravity="right" />
+    <Button
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/gardient"
+        android:textAllCaps="false"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập"
+        android:textSize="19dp"
+        android:onClick="Login"
+        />
+</LinearLayout>
