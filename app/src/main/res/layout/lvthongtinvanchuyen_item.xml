@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1,2,3,4,5">
+    <TableRow>
+        <TextView
+            android:drawableLeft="@drawable/ic_baseline_add_circle_24"
+            android:layout_width="wrap_content"
+            android:layout_column="1"
+            android:id="@+id/txtSTT"
+            android:padding="10dp"
+            android:text="1"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="120dp"
+            android:layout_column="1"
+            android:id="@+id/txtKhachHang"
+            android:padding="10dp"
+            android:text="Khách hàng "
+            android:textStyle="bold"
+            android:gravity="center"
+           />
+        <TextView
+            android:layout_width="120dp"
+            android:layout_column="1"
+            android:id="@+id/txtNhanVien"
+            android:padding="10dp"
+            android:text="Nhân viên "
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_column="1"
+            android:id="@+id/txtSoXe"
+            android:padding="10dp"
+            android:text="Số xe"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <LinearLayout android:layout_height="40dp"
+            android:layout_column="1"
+            android:layout_width="50dp"
+            android:orientation="vertical"
+            android:gravity="center">
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/btnSua"
+                android:textAllCaps="false"
+                android:drawableTop="@drawable/ic_baseline_edit_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"/>
+        </LinearLayout>
+    </TableRow>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#009688"/>
+    <LinearLayout
+
+        android:id="@+id/linearInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Số bill"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSoBill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Số tờ khai"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSoToKhai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Số lượng container"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSoLuong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Đơn Giá"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtDonGia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Neo Xe"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtNeoXe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Nơi lấy công"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtNoiLayCong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Nơi đóng hàng"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtNoiDongHang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Nhiên liệu"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtNhienLieu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Lương theo chuyến"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtLuongTheoChuyen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Tạm ứng"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtTamUng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Ngày đi giao"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtNgayDiGiao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Phí cầu đường"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtPhíCauDuong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Phí nâng công"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtPhiNangCong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Tổng lợi nhuận"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtTongLoiNhuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text=">>>>>>"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#009688"/>
+    </LinearLayout>
+
+</TableLayout>

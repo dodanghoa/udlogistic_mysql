@@ -1,6 +1,5 @@
 package com.example.udlogistic.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +18,6 @@ import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,39 +26,43 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.udlogistic.R;
 import com.example.udlogistic.database.FireBaseManage;
-import com.example.udlogistic.frDialog_ThemKhachHang;
-import com.example.udlogistic.fr_QuanLyKhachHang;
-import com.example.udlogistic.model.KhachHang;
+import com.example.udlogistic.frDialog_ThemNhanVien;
+import com.example.udlogistic.frDialog_ThemThongTinVanChuyen;
+import com.example.udlogistic.fr_QuanLyNhanVien;
+import com.example.udlogistic.fr_TienTe;
+import com.example.udlogistic.model.NhanVien;
+import com.example.udlogistic.model.ThongTinVanChuyen;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
-public class Adapter_LvDanhSachKhachHang extends ArrayAdapter implements Filterable {
+public class Adapter_LvDanhSachThongTinVanChuyen extends ArrayAdapter implements Filterable {
     Context context; int resource;
-    ArrayList<KhachHang>khachHangs = new ArrayList<>();
-    ArrayList<KhachHang>source = new ArrayList<>();
+    ArrayList<ThongTinVanChuyen>thongTinVanChuyens = new ArrayList<>();
+    ArrayList<ThongTinVanChuyen>source = new ArrayList<>();
     FragmentManager fragmentManager;
-    fr_QuanLyKhachHang fr_quanLyKhachHang;
-    FireBaseManage fireBaseManage = new FireBaseManage();
+    fr_TienTe fr_tienTe;
     int tam =0;
-    public Adapter_LvDanhSachKhachHang(@NonNull Context context, int resource, @NonNull ArrayList<KhachHang>khachHangs) {
-        super(context, resource, khachHangs);
+    FireBaseManage fireBaseManage = new FireBaseManage();
+    LinearLayout linearLayout;
+    public Adapter_LvDanhSachThongTinVanChuyen(@NonNull Context context, int resource, @NonNull ArrayList<ThongTinVanChuyen>thongTinVanChuyens) {
+        super(context, resource, thongTinVanChuyens);
         this.context = context;
         this.resource = resource;
-        this.khachHangs = khachHangs;
-        this.source = khachHangs;
+        this.thongTinVanChuyens = thongTinVanChuyens;
+        this.source = thongTinVanChuyens;
     }
     public  void setFragmentManage( FragmentManager fragmentManager)
     {
         this.fragmentManager = fragmentManager;
     }
-    public  void setfr_QuanLyKhachHang( fr_QuanLyKhachHang fr_quanLyKhachHang)
+    public  void setffr_TienTe(fr_TienTe fr_tienTe)
     {
-        this.fr_quanLyKhachHang = fr_quanLyKhachHang;
+        this.fr_tienTe = fr_tienTe;
     }
     @Override
     public int getCount() {
-        return khachHangs.size();
+        return thongTinVanChuyens.size();
     }
 
     @Override
@@ -81,26 +82,25 @@ public class Adapter_LvDanhSachKhachHang extends ArrayAdapter implements Filtera
             protected FilterResults performFiltering(CharSequence constraint) {
                 String strSearch = constraint.toString();
                 if (strSearch.isEmpty()) {
-                    khachHangs = source;
+                    thongTinVanChuyens = source;
                 } else {
-                    ArrayList<KhachHang> list = new ArrayList<>();
-                    for (KhachHang khachHang : source) {
-                        if (khachHang.getHoTen().toLowerCase().contains(strSearch.toLowerCase())||
-                                khachHang.getSoDienThoai().toLowerCase().contains(strSearch.toLowerCase())||
-                                khachHang.getDiaChi().toLowerCase().contains(strSearch.toLowerCase())) {
-                            list.add(khachHang);
+                    ArrayList<ThongTinVanChuyen> list = new ArrayList<>();
+                    for (ThongTinVanChuyen thongTinVanChuyen : source) {
+                        if (thongTinVanChuyen.getKhachHang().getHoTen().toLowerCase().contains(strSearch.toLowerCase())||
+                                thongTinVanChuyen.getNhanVien().getHoTen().toLowerCase().contains(strSearch.toLowerCase())||
+                                thongTinVanChuyen.getSoBill().toLowerCase().contains(strSearch.toLowerCase())) {
+                            list.add(thongTinVanChuyen);
                         }
                     }
-                    khachHangs = list;
+                    thongTinVanChuyens = list;
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = khachHangs;
+                filterResults.values = thongTinVanChuyens;
                 return filterResults;
             }
-
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                khachHangs = (ArrayList<KhachHang>) results.values;
+                thongTinVanChuyens = (ArrayList<ThongTinVanChuyen>) results.values;
                 notifyDataSetChanged();
             }
         };
@@ -109,31 +109,69 @@ public class Adapter_LvDanhSachKhachHang extends ArrayAdapter implements Filtera
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View view = LayoutInflater.from(context).inflate(R.layout.lvkhachhang_item,null);
+        View view = LayoutInflater.from(context).inflate(R.layout.lvthongtinvanchuyen_item,null);
         //Nạp layout
         TextView txtSTT = view.findViewById(R.id.txtSTT);
-        TextView txtHoTen = view.findViewById(R.id.txtHoTen);
-        TextView txtSoDienThoai = view.findViewById(R.id.txtSoDienThoai);
-        TextView txtDiaChi = view.findViewById(R.id.txtDiaChi);
+        TextView  txtKhachHang = view.findViewById(R.id.txtKhachHang);
+        TextView txtNhanVien = view.findViewById(R.id.txtNhanVien);
+        TextView txtSoToKhai = view.findViewById(R.id.txtSoToKhai);
+        TextView txtNgayDiGiao = view.findViewById(R.id.txtNgayDiGiao);
+        TextView txtNoiLayCong = view.findViewById(R.id.txtNoiLayCong);
+        TextView txtDonGia = view.findViewById(R.id.txtDonGia);
+        TextView txtPhiCauDuong = view.findViewById(R.id.txtPhíCauDuong);
+        TextView txtNeoXe = view.findViewById(R.id.txtNeoXe);
+        TextView txtTamUng = view.findViewById(R.id.txtTamUng);
+        TextView txtsoBill = view.findViewById(R.id.txtSoBill);
+        TextView txtNoiDongHang = view.findViewById(R.id.txtNoiDongHang);
+        TextView txtNhienLieu = view.findViewById(R.id.txtNhienLieu);
+        TextView txtPhiNangCong = view.findViewById(R.id.txtPhiNangCong);
+        TextView txtLuongTheoChuyen = view.findViewById(R.id.txtLuongTheoChuyen);
+        TextView txtsoContainer = view.findViewById(R.id.txtSoLuong);
+        TextView txtsoXe = view.findViewById(R.id.txtSoXe);
+        TextView txtTongLoiNhuan = view.findViewById(R.id.txtTongLoiNhuan);
+
         LinearLayout ln = view.findViewById(R.id.linearInfo);
         Button btnSua = view.findViewById(R.id.btnSua);
-        KhachHang khachHang = khachHangs.get(position);
+        ThongTinVanChuyen thongTinVanChuyen = thongTinVanChuyens.get(position);
         //Nạp dữ liệu
-        if (khachHang == null) {
+        if (thongTinVanChuyen == null) {
             return null;
         }
         txtSTT.setText((position+1)+"");
-        txtHoTen.setText((khachHang.getHoTen()));
-        txtSoDienThoai.setText(khachHang.getSoDienThoai());
-        txtDiaChi.setText(khachHang.getDiaChi());
-        ln.setVisibility(View.GONE);
+        txtKhachHang.setText(thongTinVanChuyen.getKhachHang().getHoTen());
+        txtNhanVien.setText(thongTinVanChuyen.getNhanVien().getHoTen());
+        txtsoXe.setText(thongTinVanChuyen.getSoXe());
+        txtLuongTheoChuyen.setText(thongTinVanChuyen.getLuongTheoChuyen());
+        txtPhiNangCong.setText(thongTinVanChuyen.getPhiNangCong());
+        txtNhienLieu.setText(thongTinVanChuyen.getNhienLieu());
+        txtNoiDongHang.setText(thongTinVanChuyen.getNoiDongHang());
+        txtsoContainer.setText(thongTinVanChuyen.getSoConTainer());
+        txtsoBill.setText(thongTinVanChuyen.getSoBill());
+        txtTamUng.setText(thongTinVanChuyen.getTamUng());
+        txtNeoXe.setText(thongTinVanChuyen.getNeoXe());
+        txtPhiCauDuong.setText(thongTinVanChuyen.getPhiCauDuong());
+        txtNoiLayCong.setText(thongTinVanChuyen.getNoiLayCong());
+        txtDonGia.setText(thongTinVanChuyen.getDonGia());
+        txtSoToKhai.setText(thongTinVanChuyen.getSoToKhai());
+        txtNgayDiGiao.setText(thongTinVanChuyen.getNgayDiGiaoHang());
+
+        int LoiNhuan = (Integer.parseInt(txtDonGia.getText().toString())
+                * Integer.parseInt(txtsoXe.getText().toString()))
+                - (Integer.parseInt(txtLuongTheoChuyen.getText().toString())
+                -  Integer.parseInt(txtTamUng.getText().toString()))
+                -(Integer.parseInt(txtNhienLieu.getText().toString())
+                    +Integer.parseInt(txtPhiCauDuong.getText().toString())
+                    +Integer.parseInt(txtPhiNangCong.getText().toString())
+                    +Integer.parseInt(txtNeoXe.getText().toString()));
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        format.setMaximumFractionDigits(0);
+
+
+        txtTongLoiNhuan.setText(format.format(LoiNhuan));
         //Sự kiện
         btnSua.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
-               // ln.startAnimation(animation);
                 //Khởi tạo popup menu
                 PopupMenu popupMenu = new PopupMenu(v.getContext(), btnSua);
                 popupMenu.inflate(R.menu.lv_edit_button);
@@ -147,13 +185,15 @@ public class Adapter_LvDanhSachKhachHang extends ArrayAdapter implements Filtera
                 });
             }
         });
-        view.setOnClickListener(new View.OnClickListener() {
+        ln.setVisibility(View.GONE);
+        txtSTT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (tam==0)
                 {
-                    AnimationSet set = new AnimationSet(true);
                     txtSTT.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_remove_circle_24, 0, 0, 0);
+                    AnimationSet set = new AnimationSet(true);
+
                     Animation animation = new AlphaAnimation(0.0f, 1.0f);
                     animation.setDuration(1000);
                     set.addAnimation(animation);
@@ -186,16 +226,19 @@ public class Adapter_LvDanhSachKhachHang extends ArrayAdapter implements Filtera
             }
         });
         return view;
+
     }
     private boolean menuItemClicked(MenuItem item, int position) {
         FragmentActivity activity = (FragmentActivity)(context);
         FragmentManager fm = activity.getSupportFragmentManager();
         android.app.FragmentManager fm2 = activity.getFragmentManager();
+
         switch (item.getItemId()) {
             case R.id.menuItem_Edit:
-                frDialog_ThemKhachHang frDialog_themKhachHang = new frDialog_ThemKhachHang(khachHangs.get(position));
-                    frDialog_themKhachHang.setTargetFragment(fr_quanLyKhachHang,1);
-                    frDialog_themKhachHang.show(fragmentManager,"frDialog_ThemKhachHang");
+                frDialog_ThemThongTinVanChuyen frDialog_themThongTinVanChuyen = new frDialog_ThemThongTinVanChuyen(thongTinVanChuyens.get(position));
+
+                frDialog_themThongTinVanChuyen.setTargetFragment(fr_tienTe,1);
+                frDialog_themThongTinVanChuyen.show(fragmentManager,"frDialog_ThemThongTinVanChuyen");
                 break;
             case R.id.menuItem_Delete:
                 //Tạo message box ? Bạn có muốn xóa
@@ -206,16 +249,14 @@ public class Adapter_LvDanhSachKhachHang extends ArrayAdapter implements Filtera
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
-                        fireBaseManage.deleteKhachHang(khachHangs.get(position));
+                        fireBaseManage.deleteThongTinVanChuyen(thongTinVanChuyens.get(position));
                         dialog.dismiss();
                     }
                 });
                 //set Text và sự kiện cho nút reject
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         // Do nothing
                         dialog.dismiss();
                     }

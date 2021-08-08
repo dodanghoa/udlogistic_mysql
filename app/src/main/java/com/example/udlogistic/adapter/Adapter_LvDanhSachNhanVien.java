@@ -156,7 +156,7 @@ public class Adapter_LvDanhSachNhanVien extends ArrayAdapter implements Filterab
                 if (tam==0)
                 {
                     AnimationSet set = new AnimationSet(true);
-
+                    txtSTT.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_remove_circle_24, 0, 0, 0);
                     Animation animation = new AlphaAnimation(0.0f, 1.0f);
                     animation.setDuration(1000);
                     set.addAnimation(animation);
@@ -172,7 +172,7 @@ public class Adapter_LvDanhSachNhanVien extends ArrayAdapter implements Filterab
                 }
                 else {
                     AnimationSet set = new AnimationSet(true);
-
+                    txtSTT.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_add_circle_24, 0, 0, 0);
                     Animation animation = new AlphaAnimation(0.0f, 1.0f);
                     animation.setDuration(1000);
                     set.addAnimation(animation);

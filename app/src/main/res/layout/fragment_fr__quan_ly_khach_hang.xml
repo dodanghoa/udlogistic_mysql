@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".fr_QuanLyCacKhauLogistic">
+    tools:context=".fr_TienTe">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -81,6 +81,7 @@
             </TableLayout>
         </LinearLayout>
     <Button
+        android:textColor="@color/white"
         android:backgroundTint="#3388e4"
         android:id="@+id/btnThemKhachHang"
         android:layout_width="match_parent"

@@ -5,6 +5,7 @@
     android:stretchColumns="1,2,3,4,5">
     <TableRow>
         <TextView
+            android:drawableLeft="@drawable/ic_baseline_add_circle_24"
             android:layout_width="wrap_content"
             android:layout_column="1"
             android:id="@+id/txtSTT"

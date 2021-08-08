@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".frDialog_ThemKhachHang">
+<ScrollView
+    android:layout_marginTop="0dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Thông tin vận chuyển"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhân viên phụ trách"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/spNhanVien"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#9C000000"/>
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số xe"
+            android:textSize="18dp"
+            android:gravity="left"/>
+
+        <EditText
+            android:id="@+id/edtSoXe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số tờ khai"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtSoToKhai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="Deprecated" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ngày đi giao"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtNgayDiGiao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="Deprecated" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nơi lấy công "
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtNoiLayCong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đơn giá"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtDonGia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phí cầu đường "
+            android:textSize="18dp"
+            android:gravity="left"/>
+
+        <EditText
+            android:id="@+id/edtPhiCauDuong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Neo Xe"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtNeoXe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tạm ứng "
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtTamUng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số bill"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtSoBill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Khách hàng"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/spKhachHang"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#9C000000"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số Container"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtSoContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nơi đóng hàng"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtnoiDongHang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhiên Liệu"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtNhienLieu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phí nâng công"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtPhiNangCong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lương theo chuyến"
+            android:textSize="18dp"
+            android:gravity="left"/>
+        <EditText
+            android:id="@+id/edtLuongTheoChuyen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:backgroundTint="#03A9F4"
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"/>
+        <Button
+            android:id="@+id/btnClose"
+            android:backgroundTint="#74575757"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Close"/>
+
+    </LinearLayout>
+
+</ScrollView>
+</RelativeLayout>

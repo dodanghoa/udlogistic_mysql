@@ -1,11 +1,9 @@
 package com.example.udlogistic;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -16,8 +14,6 @@ import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static androidx.core.view.GravityCompat.*;
 
 public class MainActivity extends AppCompatActivity {
     //Global Declaration
@@ -45,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
         //Use the MenuItem given by this library and not the default one.
         //First parameter is the title of the menu item and then the second parameter is the image which will be the background of the menu item.
 
-        menuItems.add(new MenuItem("Quản lý khách hàng", R.drawable.news_bg));
-        menuItems.add(new MenuItem("Quản lý nhân viên", R.drawable.feed_bg));
-        menuItems.add(new MenuItem("Quản lý phòng ban", R.drawable.message_bg));
-        menuItems.add(new MenuItem("Quản lý các khâu logistic", R.drawable.music_bg));
-        menuItems.add(new MenuItem("Đăng xuát", R.drawable.news_bg));
+        menuItems.add(new MenuItem("Quản lý khách hàng", R.drawable.handshake));
+        menuItems.add(new MenuItem("Quản lý nhân viên", R.drawable.staff));
+        menuItems.add(new MenuItem("Quản lý phòng ban", R.drawable.manage));
+        menuItems.add(new MenuItem("Quản lý tiền tệ", R.drawable.money));
+        menuItems.add(new MenuItem("Đăng xuát", R.drawable.exit));
 
         //then add them to navigation drawer
         sNavigationDrawer.setMenuItemList(menuItems);
@@ -95,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             }
                             case 3: {
-                                fragmentClass = fr_QuanLyCacKhauLogistic.class;
+                                fragmentClass = fr_TienTe.class;
                                 break;
                             }
                             case 4: {

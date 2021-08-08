@@ -33,27 +33,13 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hiển thị "/>
-                    <Spinner
-                        android:id="@+id/spSL"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:entries="@array/Sl"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="trong 1 trang "/>
-                </LinearLayout>
+                    android:orientation="horizontal"/>
             </LinearLayout>
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="644dp"
                 android:layout_margin="8dp"
-                android:stretchColumns="1,2,3">
+                android:stretchColumns="1,2,3,4,5">
 
                 <TableRow android:background="#2966A6">
 
@@ -68,21 +54,33 @@
                         android:id="@+id/txtHoTen"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Tên Phòng"
+                        android:text="Khách hàng"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Nhân viên"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
                     <TextView
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Chức Năng"
+                        android:text="Số Bill"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
-
+                    <TextView
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Thao tác"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
                 </TableRow>
                 <ListView
-                    android:id="@+id/lvDanhSachPhongBan"
+                    android:id="@+id/lvDanhSachThongTinVanChuyen"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:paddingBottom="50dp"
                     />
             </TableLayout>
@@ -90,12 +88,12 @@
         <Button
             android:textColor="@color/white"
             android:backgroundTint="#3388e4"
-            android:id="@+id/btnThemPhongBan"
+            android:id="@+id/btnThemThongTin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="0dp"
-            android:text="Thêm Phòng Ban"
+            android:text="Thêm thông tin vận chuyển"
             android:textAllCaps="false" />
     </RelativeLayout>
 </FrameLayout>

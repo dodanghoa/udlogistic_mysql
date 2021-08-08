@@ -111,7 +111,7 @@ public class Adapter_LvDanhSachPhongBan  extends ArrayAdapter implements Filtera
         if (phongBan == null) {
             return null;
         }
-        txtSTT.setText((position+1)+"");
+
         txtHoTen.setText((phongBan.getTenPhong()));
         //Sự kiện
         btnSua.setOnClickListener(new View.OnClickListener() {

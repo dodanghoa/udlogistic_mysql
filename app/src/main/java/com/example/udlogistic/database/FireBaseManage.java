@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.example.udlogistic.model.KhachHang;
 import com.example.udlogistic.model.NhanVien;
 import com.example.udlogistic.model.PhongBan;
+import com.example.udlogistic.model.ThongTinVanChuyen;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,15 +20,23 @@ public class FireBaseManage {
     public DatabaseReference childKhachHang;
     public DatabaseReference childPhongBan;
     public DatabaseReference childNhanVien;
+    public DatabaseReference childThongTinVanChuyen;
     public FireBaseManage() {
         database = FirebaseDatabase.getInstance("https://ud-logistic-default-rtdb.asia-southeast1.firebasedatabase.app/");
         childKhachHang = database.getReference("KhachHang");
         childPhongBan = database.getReference("PhongBan");
         childNhanVien = database.getReference("NhanVien");
+        childThongTinVanChuyen = database.getReference("ThongTinVanChuyen");
     }
     public DatabaseReference getRootReference()
     {
         return database.getReference();
+    }
+    public void writeThongTinVanChuyen(ThongTinVanChuyen thongTinVanChuyen) {
+        childThongTinVanChuyen.child(thongTinVanChuyen.getMaThongTinVanChuyen()).setValue(thongTinVanChuyen);
+    }
+    public void deleteThongTinVanChuyen(ThongTinVanChuyen thongTinVanChuyen) {
+        childThongTinVanChuyen.child(thongTinVanChuyen.getMaThongTinVanChuyen()).removeValue();
     }
     public void writeNhanVien(NhanVien nhanVien) {
         childNhanVien.child(nhanVien.getMaNhanVien()).setValue(nhanVien);
