@@ -1,6 +1,5 @@
 package com.example.udlogistic;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,25 +11,18 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.developer.kalert.KAlertDialog;
-import com.example.udlogistic.adapter.Adapter_LvDanhSachKhachHang;
 import com.example.udlogistic.adapter.Adapter_LvDanhSachNhanVien;
-import com.example.udlogistic.database.FireBaseManage;
-import com.example.udlogistic.model.KhachHang;
+import com.example.udlogistic.database.MySQL_Manage;
 import com.example.udlogistic.model.NhanVien;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 
 public class fr_QuanLyNhanVien extends Fragment implements frDialog_ThemNhanVien.OnInputSelected {
 
-    FireBaseManage fireBaseManage;
 
+    MySQL_Manage mySQL_manage;
     static final String TAG = "fr_QuanLyNhanVien";
     SearchView searchView;
     ListView lvDanhSachNhanVien;
@@ -60,7 +52,8 @@ public class fr_QuanLyNhanVien extends Fragment implements frDialog_ThemNhanVien
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_fr__quan_ly_nhan_vien, container, false);
-        fireBaseManage = new FireBaseManage();
+
+        mySQL_manage = new MySQL_Manage();
         setControl();
         loadData();
         setEvent();
@@ -69,29 +62,15 @@ public class fr_QuanLyNhanVien extends Fragment implements frDialog_ThemNhanVien
 
     private void loadData() {
 
-        fireBaseManage.childNhanVien.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                nhanViens.clear();
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    NhanVien nhanVien = postSnapshot.getValue(NhanVien.class);
-                    nhanViens.add(nhanVien);
-                }
-
-                adapter_lvDanhSachNhanVien.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void setEvent() {
+        nhanViens = mySQL_manage.getNhanVien();
         adapter_lvDanhSachNhanVien = new Adapter_LvDanhSachNhanVien(view.getContext(),R.layout.lvnhanvien_item,nhanViens);
         adapter_lvDanhSachNhanVien.setFragmentManage(getFragmentManager());
         adapter_lvDanhSachNhanVien.setfr_QuanLyNhanVien(fr_QuanLyNhanVien.this);
 
+        lvDanhSachNhanVien.setAdapter(adapter_lvDanhSachNhanVien);
+    }
+
+    private void setEvent() {
         lvDanhSachNhanVien.setAdapter(adapter_lvDanhSachNhanVien);
         btnThemNhanVien.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,11 +100,16 @@ public class fr_QuanLyNhanVien extends Fragment implements frDialog_ThemNhanVien
 
     @Override
     public void setInput(NhanVien nhanVien) {
-        fireBaseManage.writeNhanVien(nhanVien);
+        mySQL_manage.writeNhanVien(nhanVien);
+        adapter_lvDanhSachNhanVien.notifyDataSetChanged();
+        loadData();
+        loadData();
     }
 
     @Override
     public void setInputUpdate(NhanVien nhanVien) { ;
-                fireBaseManage.writeNhanVien(nhanVien);
-        }
+                mySQL_manage.updateNhanVien(nhanVien);
+        loadData();
+
+    }
     }

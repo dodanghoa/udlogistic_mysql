@@ -1,11 +1,9 @@
 package com.example.udlogistic;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +11,18 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.developer.kalert.KAlertDialog;
 import com.example.udlogistic.adapter.Adapter_LvDanhSachKhachHang;
-import com.example.udlogistic.database.FireBaseManage;
+import com.example.udlogistic.database.MySQL_Manage;
 import com.example.udlogistic.model.KhachHang;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 
 public class fr_QuanLyKhachHang extends Fragment implements frDialog_ThemKhachHang.OnInputSelected {
 
-    FireBaseManage fireBaseManage;
+
+
     static final String TAG = "fr_QuanLyKhachHang";
     SearchView searchView;
     ListView lvDanhSachKhachHang;
@@ -37,6 +31,7 @@ public class fr_QuanLyKhachHang extends Fragment implements frDialog_ThemKhachHa
     Adapter_LvDanhSachKhachHang adapter_lvDanhSachKhachHang;
     ArrayList<KhachHang>khachHangs = new ArrayList<KhachHang>();
     Button btnThemKhachHang;
+    MySQL_Manage mySQL_manage;
     public fr_QuanLyKhachHang() {
     }
 
@@ -57,7 +52,8 @@ public class fr_QuanLyKhachHang extends Fragment implements frDialog_ThemKhachHa
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_fr__quan_ly_khach_hang, container, false);
-        fireBaseManage = new FireBaseManage();
+
+        mySQL_manage = new MySQL_Manage();
         setControl();
         loadData();
         setEvent();
@@ -66,29 +62,14 @@ public class fr_QuanLyKhachHang extends Fragment implements frDialog_ThemKhachHa
 
     private void loadData() {
 
-       fireBaseManage.childKhachHang.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                khachHangs.clear();
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    KhachHang khachHang = postSnapshot.getValue(KhachHang.class);
-                    khachHangs.add(khachHang);
-                }
-                adapter_lvDanhSachKhachHang.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        khachHangs = mySQL_manage .getKhachHang();
+        adapter_lvDanhSachKhachHang = new Adapter_LvDanhSachKhachHang(view.getContext(),R.layout.lvkhachhang_item,khachHangs);
+        adapter_lvDanhSachKhachHang.setFragmentManage(getFragmentManager());
+        adapter_lvDanhSachKhachHang.setfr_QuanLyKhachHang(fr_QuanLyKhachHang.this);
+        lvDanhSachKhachHang.setAdapter(adapter_lvDanhSachKhachHang);
     }
 
     private void setEvent() {
-        adapter_lvDanhSachKhachHang = new Adapter_LvDanhSachKhachHang(view.getContext(),R.layout.lvkhachhang_item,khachHangs);
-           adapter_lvDanhSachKhachHang.setFragmentManage(getFragmentManager());
-           adapter_lvDanhSachKhachHang.setfr_QuanLyKhachHang(fr_QuanLyKhachHang.this);
-
-        lvDanhSachKhachHang.setAdapter(adapter_lvDanhSachKhachHang);
         btnThemKhachHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,13 +98,16 @@ public class fr_QuanLyKhachHang extends Fragment implements frDialog_ThemKhachHa
 
     @Override
     public void setInput(KhachHang khachHang) {
-        fireBaseManage.writeKhachHang(khachHang);
+        mySQL_manage.writeKhachHang(khachHang);
+        adapter_lvDanhSachKhachHang.notifyDataSetChanged();
+        loadData();
     }
-
     @Override
     public void setInputUpdate(KhachHang khachHang) { ;
-                fireBaseManage.writeKhachHang(khachHang);
-        }
+                mySQL_manage.updateKhachHang(khachHang);
+                adapter_lvDanhSachKhachHang.notifyDataSetChanged();
+        loadData();
+    }
     }
 
 

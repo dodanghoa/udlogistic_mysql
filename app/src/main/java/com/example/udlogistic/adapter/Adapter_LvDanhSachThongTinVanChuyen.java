@@ -25,12 +25,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.udlogistic.R;
-import com.example.udlogistic.database.FireBaseManage;
-import com.example.udlogistic.frDialog_ThemNhanVien;
+import com.example.udlogistic.database.MySQL_Manage;
 import com.example.udlogistic.frDialog_ThemThongTinVanChuyen;
-import com.example.udlogistic.fr_QuanLyNhanVien;
 import com.example.udlogistic.fr_TienTe;
-import com.example.udlogistic.model.NhanVien;
 import com.example.udlogistic.model.ThongTinVanChuyen;
 
 import java.text.NumberFormat;
@@ -43,7 +40,7 @@ public class Adapter_LvDanhSachThongTinVanChuyen extends ArrayAdapter implements
     FragmentManager fragmentManager;
     fr_TienTe fr_tienTe;
     int tam =0;
-    FireBaseManage fireBaseManage = new FireBaseManage();
+    MySQL_Manage mySQL_manage = new MySQL_Manage();
     LinearLayout linearLayout;
     public Adapter_LvDanhSachThongTinVanChuyen(@NonNull Context context, int resource, @NonNull ArrayList<ThongTinVanChuyen>thongTinVanChuyens) {
         super(context, resource, thongTinVanChuyens);
@@ -249,7 +246,9 @@ public class Adapter_LvDanhSachThongTinVanChuyen extends ArrayAdapter implements
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
-                        fireBaseManage.deleteThongTinVanChuyen(thongTinVanChuyens.get(position));
+                        mySQL_manage.deleteThongTinVanChuyen(thongTinVanChuyens.get(position));
+                        thongTinVanChuyens.remove(position);
+                        notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });

@@ -18,7 +18,6 @@ import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,12 +25,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.udlogistic.R;
-import com.example.udlogistic.database.FireBaseManage;
-import com.example.udlogistic.frDialog_ThemKhachHang;
+import com.example.udlogistic.database.MySQL_Manage;
 import com.example.udlogistic.frDialog_ThemNhanVien;
-import com.example.udlogistic.fr_QuanLyKhachHang;
 import com.example.udlogistic.fr_QuanLyNhanVien;
-import com.example.udlogistic.model.KhachHang;
 import com.example.udlogistic.model.NhanVien;
 
 import java.util.ArrayList;
@@ -43,7 +39,8 @@ public class Adapter_LvDanhSachNhanVien extends ArrayAdapter implements Filterab
     FragmentManager fragmentManager;
     fr_QuanLyNhanVien fr_quanLyNhanVien;
     int tam =0;
-    FireBaseManage fireBaseManage = new FireBaseManage();
+
+    MySQL_Manage mySQL_manage = new MySQL_Manage();
     LinearLayout linearLayout;
     public Adapter_LvDanhSachNhanVien(@NonNull Context context, int resource, @NonNull ArrayList<NhanVien>nhanViens) {
         super(context, resource, nhanViens);
@@ -212,7 +209,9 @@ public class Adapter_LvDanhSachNhanVien extends ArrayAdapter implements Filterab
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
-                        fireBaseManage.deleteNhanVien(nhanViens.get(position));
+                        mySQL_manage.deleteNhanVien(nhanViens.get(position));
+                        nhanViens.remove(position);
+                        notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });

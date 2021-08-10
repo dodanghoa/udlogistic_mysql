@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         menuItems.add(new MenuItem("Quản lý nhân viên", R.drawable.staff));
         menuItems.add(new MenuItem("Quản lý phòng ban", R.drawable.manage));
         menuItems.add(new MenuItem("Quản lý tiền tệ", R.drawable.money));
-        menuItems.add(new MenuItem("Đăng xuát", R.drawable.exit));
+        menuItems.add(new MenuItem("Đăng xuất", R.drawable.exit));
 
         //then add them to navigation drawer
         sNavigationDrawer.setMenuItemList(menuItems);

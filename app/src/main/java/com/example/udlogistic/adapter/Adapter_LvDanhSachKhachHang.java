@@ -1,6 +1,5 @@
 package com.example.udlogistic.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +18,6 @@ import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,13 +25,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.udlogistic.R;
-import com.example.udlogistic.database.FireBaseManage;
+import com.example.udlogistic.database.MySQL_Manage;
 import com.example.udlogistic.frDialog_ThemKhachHang;
 import com.example.udlogistic.fr_QuanLyKhachHang;
 import com.example.udlogistic.model.KhachHang;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 public class Adapter_LvDanhSachKhachHang extends ArrayAdapter implements Filterable {
     Context context; int resource;
@@ -42,7 +38,8 @@ public class Adapter_LvDanhSachKhachHang extends ArrayAdapter implements Filtera
     ArrayList<KhachHang>source = new ArrayList<>();
     FragmentManager fragmentManager;
     fr_QuanLyKhachHang fr_quanLyKhachHang;
-    FireBaseManage fireBaseManage = new FireBaseManage();
+
+    MySQL_Manage mySQL_manage = new MySQL_Manage();
     int tam =0;
     public Adapter_LvDanhSachKhachHang(@NonNull Context context, int resource, @NonNull ArrayList<KhachHang>khachHangs) {
         super(context, resource, khachHangs);
@@ -206,13 +203,14 @@ public class Adapter_LvDanhSachKhachHang extends ArrayAdapter implements Filtera
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
-                        fireBaseManage.deleteKhachHang(khachHangs.get(position));
+                        mySQL_manage.deleteKhachHang(khachHangs.get(position));
+                        khachHangs.remove(position);
+                        notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
                 //set Text và sự kiện cho nút reject
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

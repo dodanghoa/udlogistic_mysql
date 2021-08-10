@@ -13,14 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.udlogistic.database.FireBaseManage;
 import com.example.udlogistic.model.KhachHang;
 
 import java.util.UUID;
 
 
 public class frDialog_ThemKhachHang extends DialogFragment {
-    FireBaseManage fireBaseManage;
+
     KhachHang khachHang;
     public  interface OnInputSelected{
         void setInputUpdate(KhachHang khachHang);
@@ -55,7 +54,7 @@ public class frDialog_ThemKhachHang extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fireBaseManage = new FireBaseManage();
+
         view =  inflater.inflate(R.layout.fragment_fr_dialog__them_khach_hang, container, false);
         edtTenKhachHang = view.findViewById(R.id.edtTenKhachHang);
         edtDiaChi = view.findViewById(R.id.edtDiaChi);
@@ -106,7 +105,6 @@ public class frDialog_ThemKhachHang extends DialogFragment {
         });
         return view;
     }
-
     private boolean Check() {
         boolean res = true;
         if(edtTenKhachHang.getText().toString().isEmpty())

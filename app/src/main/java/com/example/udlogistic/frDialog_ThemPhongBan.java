@@ -12,15 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.udlogistic.database.FireBaseManage;
-import com.example.udlogistic.model.KhachHang;
 import com.example.udlogistic.model.PhongBan;
 
 import java.util.UUID;
 
 
 public class frDialog_ThemPhongBan extends DialogFragment {
-    FireBaseManage fireBaseManage;
+
     PhongBan phongBan;
     public  interface OnInputSelected{
         void setInputUpdate(PhongBan phongBan);
@@ -54,7 +52,6 @@ public class frDialog_ThemPhongBan extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fireBaseManage = new FireBaseManage();
         view =  inflater.inflate(R.layout.fragment_fr_dialog__them_phong_ban, container, false);
         edtTenPhongBan = view.findViewById(R.id.edtTenPhongBan);
         btnClose = view.findViewById(R.id.btnClose);

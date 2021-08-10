@@ -12,22 +12,16 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.example.udlogistic.adapter.Adapter_LvDanhSachNhanVien;
 import com.example.udlogistic.adapter.Adapter_LvDanhSachThongTinVanChuyen;
-import com.example.udlogistic.database.FireBaseManage;
-import com.example.udlogistic.model.NhanVien;
+import com.example.udlogistic.database.MySQL_Manage;
 import com.example.udlogistic.model.ThongTinVanChuyen;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 
 public class fr_TienTe extends Fragment implements frDialog_ThemThongTinVanChuyen.OnInputSelected {
 
-    FireBaseManage fireBaseManage;
-
+    MySQL_Manage mySQL_manage;
     static final String TAG = "fr_TienTe";
     SearchView searchView;
     ListView lvDanhSachNhanVien;
@@ -57,7 +51,8 @@ public class fr_TienTe extends Fragment implements frDialog_ThemThongTinVanChuye
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_fr__tien_te, container, false);
-        fireBaseManage = new FireBaseManage();
+
+        mySQL_manage = new MySQL_Manage();
         setControl();
         loadData();
         setEvent();
@@ -66,28 +61,15 @@ public class fr_TienTe extends Fragment implements frDialog_ThemThongTinVanChuye
 
     private void loadData() {
 
-        fireBaseManage.childThongTinVanChuyen.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                thongTinVanChuyens.clear();
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    ThongTinVanChuyen thongTinVanChuyen = postSnapshot.getValue(ThongTinVanChuyen.class);
-                    thongTinVanChuyens.add(thongTinVanChuyen);
-                }
-                adapter_lvDanhSachThongTinVanChuyen.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void setEvent() {
+        thongTinVanChuyens= mySQL_manage.getThongTinVanChuyen();
         adapter_lvDanhSachThongTinVanChuyen = new Adapter_LvDanhSachThongTinVanChuyen(view.getContext(),R.layout.lvthongtinvanchuyen_item,thongTinVanChuyens);
         adapter_lvDanhSachThongTinVanChuyen.setFragmentManage(getFragmentManager());
         adapter_lvDanhSachThongTinVanChuyen.setffr_TienTe(fr_TienTe.this);
         lvDanhSachNhanVien.setAdapter(adapter_lvDanhSachThongTinVanChuyen);
+    }
+
+    private void setEvent() {
+
         btnThemThongTin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,14 +97,16 @@ public class fr_TienTe extends Fragment implements frDialog_ThemThongTinVanChuye
 
 
 
-
     @Override
     public void setInputUpdate(ThongTinVanChuyen thongTinVanChuyen) {
-        fireBaseManage.writeThongTinVanChuyen(thongTinVanChuyen);
+        mySQL_manage.updateThongTinVanChuyen(thongTinVanChuyen);
+        loadData();
     }
 
     @Override
     public void setInput(ThongTinVanChuyen thongTinVanChuyen) {
-        fireBaseManage.writeThongTinVanChuyen(thongTinVanChuyen);
+        mySQL_manage.writeThongTinVanChuyen(thongTinVanChuyen);
+        loadData();
+
     }
 }

@@ -20,12 +20,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.udlogistic.R;
-import com.example.udlogistic.database.FireBaseManage;
-import com.example.udlogistic.frDialog_ThemKhachHang;
+import com.example.udlogistic.database.MySQL_Manage;
 import com.example.udlogistic.frDialog_ThemPhongBan;
-import com.example.udlogistic.fr_QuanLyKhachHang;
 import com.example.udlogistic.fr_QuanLyPhongBan;
-import com.example.udlogistic.model.KhachHang;
 import com.example.udlogistic.model.PhongBan;
 
 import java.util.ArrayList;
@@ -36,7 +33,8 @@ public class Adapter_LvDanhSachPhongBan  extends ArrayAdapter implements Filtera
     ArrayList<PhongBan>source = new ArrayList<>();
     FragmentManager fragmentManager;
     fr_QuanLyPhongBan fr_quanLyPhongBan;
-    FireBaseManage fireBaseManage = new FireBaseManage();
+    MySQL_Manage mySQL_manage = new MySQL_Manage();
+
     public Adapter_LvDanhSachPhongBan(@NonNull Context context, int resource, @NonNull ArrayList<PhongBan> phongBans) {
         super(context, resource, phongBans);
         this.context = context;
@@ -88,7 +86,6 @@ public class Adapter_LvDanhSachPhongBan  extends ArrayAdapter implements Filtera
                 filterResults.values = phongBans;
                 return filterResults;
             }
-
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 phongBans = (ArrayList<PhongBan>) results.values;
@@ -105,13 +102,12 @@ public class Adapter_LvDanhSachPhongBan  extends ArrayAdapter implements Filtera
         TextView txtSTT = view.findViewById(R.id.txtSTT);
         TextView txtHoTen = view.findViewById(R.id.txtTenPhong);
         Button btnSua = view.findViewById(R.id.btnSua);
-
         PhongBan phongBan = phongBans.get(position);
         //Nạp dữ liệu
         if (phongBan == null) {
             return null;
         }
-
+        txtSTT.setText((position+1)+"");
         txtHoTen.setText((phongBan.getTenPhong()));
         //Sự kiện
         btnSua.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +133,6 @@ public class Adapter_LvDanhSachPhongBan  extends ArrayAdapter implements Filtera
         FragmentActivity activity = (FragmentActivity)(context);
         FragmentManager fm = activity.getSupportFragmentManager();
         android.app.FragmentManager fm2 = activity.getFragmentManager();
-
         switch (item.getItemId()) {
             case R.id.menuItem_Edit:
                 frDialog_ThemPhongBan frDialog_themPhongBan = new frDialog_ThemPhongBan(phongBans.get(position));
@@ -154,7 +149,9 @@ public class Adapter_LvDanhSachPhongBan  extends ArrayAdapter implements Filtera
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
-                        fireBaseManage.delePhongBan(phongBans.get(position));
+                        mySQL_manage.delePhongBan(phongBans.get(position));
+                        phongBans.remove(position);
+                        notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });

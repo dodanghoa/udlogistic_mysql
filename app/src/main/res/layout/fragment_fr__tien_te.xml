@@ -67,7 +67,7 @@
                     <TextView
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Số Bill"
+                        android:text="Số xe"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
                     <TextView

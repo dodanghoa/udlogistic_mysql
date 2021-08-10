@@ -16,8 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.udlogistic.R;
-import com.example.udlogistic.database.FireBaseManage;
+import com.example.udlogistic.database.MySQL_Manage;
 import com.example.udlogistic.model.NhanVien;
 import com.example.udlogistic.model.PhongBan;
 import com.google.firebase.database.DataSnapshot;
@@ -25,13 +24,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.UUID;
 
 
 public class frDialog_ThemNhanVien extends DialogFragment {
-    FireBaseManage fireBaseManage;
     NhanVien nhanVien;
+    MySQL_Manage mySQL_manage= new MySQL_Manage();
     ArrayList<PhongBan> phongBans = new ArrayList<>();
     public  interface OnInputSelected{
         void setInputUpdate(NhanVien nhanVien);
@@ -61,11 +59,12 @@ public class frDialog_ThemNhanVien extends DialogFragment {
         super.onCreate(savedInstanceState);
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fireBaseManage = new FireBaseManage();
+        MySQL_Manage mySQL_manage = new MySQL_Manage();
         view =  inflater.inflate(R.layout.fragment_fr_dialog__them_nhan_vien, container, false);
         edtTenNhanVien = view.findViewById(R.id.edtTenNhanVien);
         edtDiaChi = view.findViewById(R.id.edtDiaChi);
@@ -124,16 +123,10 @@ public class frDialog_ThemNhanVien extends DialogFragment {
         });
         return view;
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void loadDataPhongBan( ) {
-        fireBaseManage.childPhongBan.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                phongBans.clear();
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    PhongBan phongBan = postSnapshot.getValue(PhongBan.class);
-                        phongBans.add(phongBan);
-                    }
+
+                phongBans = mySQL_manage.getPhongBan();
                 ArrayList<String>spinnerArray = new ArrayList<>();
                 phongBans.forEach(phongBan -> {
                     spinnerArray.add(phongBan.getTenPhong());
@@ -144,24 +137,12 @@ public class frDialog_ThemNhanVien extends DialogFragment {
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout
                         .simple_spinner_dropdown_item);
                 spPhongBan.setAdapter(spinnerArrayAdapter);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void checkedSpinnerPhongban(String s ) {
-        fireBaseManage.childPhongBan.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<PhongBan>phongBans = new ArrayList<>();
 
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    PhongBan phongBan = postSnapshot.getValue(PhongBan.class);
-                    phongBans.add(phongBan);
-                }
+                ArrayList<PhongBan>phongBans = mySQL_manage.getPhongBan();
                 ArrayList<String>spinnerArray = new ArrayList<>();
                 phongBans.forEach(o -> {
                 if (o.getTenPhong().equals(s))
@@ -170,12 +151,6 @@ public class frDialog_ThemNhanVien extends DialogFragment {
                 }
                 });
 
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
     private boolean Check() {
         boolean res = true;
