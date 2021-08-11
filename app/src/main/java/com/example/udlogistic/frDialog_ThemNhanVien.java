@@ -3,6 +3,7 @@ package com.example.udlogistic;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -168,6 +169,15 @@ public class frDialog_ThemNhanVien extends DialogFragment {
         {
             res = false;
             edtSoDienThoai.setError("Vui lòng nhập số điên thoại");
+        }
+        else {
+            String sdt = edtSoDienThoai.getText().toString().trim();
+            if (Patterns.PHONE.matcher(sdt).matches()) {
+                res = true;
+            } else {
+                edtSoDienThoai.setError("ĐỊng dạng Số điện thoại không hợp lệ");
+                res = false;
+            }
         }
         if(edtChucVu.getText().toString().isEmpty())
         {
